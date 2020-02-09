@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+
+{% block 'title' %}Category | News Portal{% endblock %}
+
+{% block 'body' %}
+    <!--list page-->
+<div class="fl-list-page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="list-page-container">
+                    <header class="news-header">
+                        <h2>
+                            <span>
+                                <a href="#">अन्तर्राष्ट्रिय</a>
+                            </span>
+                        </h2>
+                        <div class="clearfix"></div>
+                    </header>
+                    {% for n in news %}
+
+                    <div class="news-content">
+                        <header>
+                            <a href="{% url 'news' n.slug %}"><h1>{{ n.title }}</h1></a>
+                        </header>
+                        <figure>
+                        {% if n.image %}
+                            <img src="{{MEDIA_URL}}{{n.image.url}}" alt="image">
+                        {% endif %}
+                        </figure>
+                        <time><i class="fa fa-clock-o"></i>{{n.publish_date}}
+                                    </time>
+
+                        <p>{{n.description | truncatewords:20}}</p>
+                        <div class="clearfix"></div>
+                    </div>
+                    {% endfor %}
+
+                    
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="place-for-ads">
+                    <figure>
+                        <img src="image/adv3.jpg">
+                    </figure>
+                     <figure>
+                        <img src="image/adv4.jpg">
+                    </figure>
+                     <figure>
+                        <img src="image/adv5.jpg">
+                    </figure>
+                     <figure>
+                        <img src="image/adv3.jpg">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
