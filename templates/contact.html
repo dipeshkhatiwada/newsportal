@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+
+{% block 'title' %}Contact Us{% endblock %}
+
+{% block 'body' %}
+<div class="fl-detail-page-wrapper">
+    <div class="container">
+        <div class="row">
+           <div class="col-md-12">
+                <div class="contact-form">
+                {% include 'component/message.html' %}
+                    <h3>सम्पर्क गर्नको लागि फारम भर्नुहोस्</h3>
+                    <form method="post" >
+                    {% csrf_token %}
+                    {{forms.as_p}}
+                        {% comment %} <label>नाम (अनिवार्य)</label>
+                        <input type="text" name="name" placeholder="Your name">
+
+                        <label>इमेल (अनिवार्य)</label>
+                        <input type="email" name="email" placeholder="Your email">
+
+                        <label>प्रतिक्रिया दिनुहोस् </label>
+                        <textarea name="name" placeholder="message"></textarea> {% endcomment %}
+                        <input type="submit"  name="submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

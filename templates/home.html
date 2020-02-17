@@ -3,6 +3,7 @@
 {% block 'title' %}Home | News Portal{% endblock %}
 
 {% block 'body' %}
+{% load static %}
 
 <!--breaking-news-->
 <section class="fl-breaking-news-wrapper">
@@ -10,17 +11,17 @@
         <div class="row">
             <div class="col-md-12">
                 <article class="breaking-news">
-                    <h1><span>मुख्य समाचार</span></h1>
+                    <h1><span>समाचार</span></h1>
                     <label class="line"></label>
                     <div class="owl-carousel owl-theme breaking1">
+                    {% for slider in sliders%}
                         <div class="item">
-                            <h2><a href="#">नेपाली बाजालाई अन्तर्राष्ट्रिय स्तरमा चिनाउने ब्यान्ड </a></h2>
-                            <p>जटायु अर्थात हिन्दू धर्मको पवित्र रामायण ग्रन्थको एक गिद्धको नाम । उक्त गिद्धले रावणको हरणमा परेकी सीतालाई बचाउने प्रसास गर्छ । तर यस क्रममा रावणले पखेटा काटेर मारिदिन्छ । जटायु अर्थात हिन्दू धर्मको पवित्र रामायण ग्रन्थको एक गिद्धको नाम । उक्त गिद्धले रावणको हरणमा परेकी सीतालाई बचाउने प्रसास गर्छ । तर यस क्रममा रावणले पखेटा काटेर मारिदिन्छ । </p>
+                            <h2><a href="#">{{slider.title}}</a></h2>
+                            {% if slider.image %}
+                                <a href="#"><img src="{{MEDIA_URL}}{{slider.image.url}}" alt=""></a>
+                            {% endif %}
                         </div>
-                        <div class="item">
-                            <h2><a href="#">नेपाली बाजालाई अन्तर्राष्ट्रिय स्तरमा चिनाउने ब्यान्ड</a></h2>
-                            <p>जटायु अर्थात हिन्दू धर्मको पवित्र रामायण ग्रन्थको एक गिद्धको नाम । उक्त गिद्धले रावणको हरणमा परेकी सीतालाई बचाउने प्रसास गर्छ । तर यस क्रममा रावणले पखेटा काटेर मारिदिन्छ । जटायु अर्थात हिन्दू धर्मको पवित्र रामायण ग्रन्थको एक गिद्धको नाम । उक्त गिद्धले रावणको हरणमा परेकी सीतालाई बचाउने प्रसास गर्छ । तर यस क्रममा रावणले पखेटा काटेर मारिदिन्छ । </p>
-                        </div>
+                    {% endfor %}
                     </div>
                 </article>
             </div>
@@ -28,25 +29,6 @@
     </div>
 </section>
 <!--breaking news portion ends-->
-
-<!--politics-news-->
-<section class="fl-politics-news-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <article class="politics-news">
-                    <h1><span>राजनीति</span></h1>
-                    <label class="line"></label>
-                    <div class="politics-news-item">
-                        <h2><a href="#">देउवा र पौडेलको बेमेल कायमै, तीन सातापछि भेट हुँदा देखिएन हार्दिकत</a></h2>
-                        <img src="image/p1.jpg">
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- main news portion starts -->
 <!--MAIN NEWS-->
@@ -58,7 +40,7 @@
                     <header class="news-header">
                         <h2>
                             <span>
-                                <a href="second.html">मुख्य समाचार</a>
+                                <a>मुख्य समाचार</a>
                             </span>
                         </h2>
                         <div class="clearfix"></div>
@@ -67,55 +49,36 @@
                     <section class="main-news-entry">
                         <article class="main-news-big-content">
                             <a href="#">
-                                <h1>३६ अर्ब लगानीमा चिनियाँले बनाएको धुवाँरहित सिमेन्ट उद्योग&nbsp;</h1>
+                                <h1>{{main_news1}}&nbsp;</h1>
                                 <figure>
-                                    <img src="image/news-big1.jpg" alt="image">
+                                    {% comment %} <img src="{{MEDIA_URL}}{{main_news[0].image}}" alt="image"> {% endcomment %}
                                 </figure>
                             </a>
                             <p>२१ साउन, काठमाडौं । अहिले बैंक तथा वित्तीय संस्थाहरुले धमाधम वित्तीय विवरणहरु प्रकाशित गरिरहेका छन् । वित्तीय विवरणमा दिइएका तथ्यांकहरुले मोटामोटी रुपमा संस्थाको अवस्था कस्तो
                                         छ, स्पष्ट देखाउँछ । बैंकहरुले कति नाफा र कति ब्याज कमाए, कति सञ्चालन खर्च..</p>
                         </article>
                         <div class="row">
+                        {% for m_news in main_news %}
                             <article class="col-md-6">
                                 <div class="main-news-small-content">
                                     <a href="#">
-                                        <h2>पाल्पामा स्वाइन फ्लुबाट ३ को मृत्यु, थप ३ लाई उपचार गर्न हेलिकोप्टरबाट काठमाडौँ ल्याइयो</h2>
+                                        <h2>{{m_news.title}}</h2>
                                         <div class="main-news-small-detail">
                                             <div class="row">
                                                 <div class="col-md-5 col-sm-4">
                                                     <figure>
-                                                        <img src="image/n1.jpg" alt="image">
+                                                        <img src="{{MEDIA_URL}}{{m_news.image}}" alt="image">
                                                     </figure>
                                                 </div>
                                                 <div class="col-md-7 col-sm-8">
-                                                    <p>काठमाडौँ- बुबालाई कलेजो प्रत्यारोपण गर्न कलेजो दिएकी छोरी सरिता महर्जनको परिवारलाई एक लाख रुपैयाँ सहयोग</p>
+                                                    <p>{{m_news.description | truncatewords:20}}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                             </article>
-
-                            <article class="col-md-6">
-                                <div class="main-news-small-content">
-                                    <a href="#">
-                                        <h2>पाल्पामा स्वाइन फ्लुबाट ३ को मृत्यु, थप ३ लाई उपचार गर्न हेलिकोप्टरबाट काठमाडौँ ल्याइयो</h2>
-
-                                        <div class="main-news-small-detail">
-                                            <div class="row">
-                                                <div class="col-md-5 col-sm-4">
-                                                    <figure>
-                                                        <img src="image/news_2.jpg" alt="image">
-                                                    </figure>
-                                                </div>
-                                                <div class="col-md-7 col-sm-8">
-                                                    <p>काठमाडौँ- बुबालाई कलेजो प्रत्यारोपण गर्न कलेजो दिएकी छोरी सरिता  महर्जनको परिवारलाई एक लाख रुपैयाँ सहयोग</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </article>
+                        {% endfor %}
                         </div>
                     </section>
                 </div>
@@ -124,16 +87,16 @@
            <div class="col-md-3">
                 <div class="place-for-ads">
                     <figure>
-                        <img src="image/adv3.jpg">
+                        <img src="{% static 'image/adv3.jpg' %}">
                     </figure>
                      <figure>
-                        <img src="image/adv4.jpg">
+                        <img src="{% static 'image/adv4.jpg' %}">
                     </figure>
                      <figure>
-                        <img src="image/adv5.jpg">
+                        <img src="{% static 'image/adv5.jpg' %}">
                     </figure>
                      <figure>
-                        <img src="image/adv3.jpg">
+                        <img src="{% static 'image/adv3.jpg' %}">
                     </figure>
                 </div>
             </div>
@@ -172,67 +135,19 @@
 
                     <div class="international-new-content">
                         <div class="row">
+                        {% for news1 in cat1_news %}
                             <div class="col-md-4">
                                 <article class="international-news-big-content">
-                                    <a href="#">
-                                        <h1>इन्फ्लुएन्जाका कारण वालिङका १७ स्कुल एक हप्ताका लागि बन्द</h1>
+                                    <a href="{% url 'news' news1.slug %}">
+                                        <h1>{{news1.title}}</h1>
                                         <figure>
-                                            <img src="image/i1.jpg" alt="image">
+                                            <img src="{{MEDIA_URL}}{{news1.image}}" alt="{{news1.title}}">
                                         </figure>
                                     </a>
-                                    <!-- <p>२१ साउन, काठमाडौं । अहिले बैंक तथा वित्तीय संस्थाहरुले धमाधम वित्तीय विवरणहरु  प्रकाशितगरिरहेका छन् । वित्तीय विवरणमा दिइएका तथ्यांकहरुले मोटामोटी रुपमा संस्थाको अवस्था कस्तो छ, स्पष्ट देखाउँछ । बैंकहरुले कति नाफा र कति ब्याज कमाए, कति सञ्चालन खर्चछ, स्पष्ट देखाउँछ । बैंकहरुले कति नाफा र कति ब्याज कमाए, कति सञ्चालन गरिरहेका छन् । वित्तीय विवरणमा दिइएका तथ्यांकहरुले मोटामोटी रुपमा संस्थाको अवस्था कस्तो छ, स्पष्ट देखाउँछ । बैंकहरुले कति नाफा र कति ब्याज कमाए, कति सञ्चालन खर्चछ, स्पष्ट देखाउँछ । बैंकहरुले कति नाफा र कति ब्याज कमाए, कति सञ्चालन</p> -->
+                                     <p>{{m_news.description | truncatewords:20}}</p>
                                 </article>
                             </div>
-                            <div class="col-md-4">
-                                <article class="international-news-big-content">
-                                    <a href="#">
-                                        <h1>इन्फ्लुएन्जाका कारण वालिङका १७ स्कुल एक हप्ताका लागि बन्द</h1>
-                                        <figure>
-                                            <img src="image/i2.jpg" alt="image">
-                                        </figure>
-                                    </a>
-                                </article>
-                            </div>
-                            <div class="col-md-4">
-                                <article class="international-news-big-content">
-                                    <a href="#">
-                                        <h1>इन्फ्लुएन्जाका कारण वालिङका १७ स्कुल एक हप्ताका लागि बन्द</h1>
-                                        <figure>
-                                            <img src="image/i3.png" alt="image">
-                                        </figure>
-                                    </a>
-                                </article>
-                            </div>
-                            <div class="col-md-4">
-                                <article class="international-news-big-content">
-                                    <a href="#">
-                                        <h1>इन्फ्लुएन्जाका कारण वालिङका १७ स्कुल एक हप्ताका लागि बन्द</h1>
-                                        <figure>
-                                            <img src="image/i3.png" alt="image">
-                                        </figure>
-                                    </a>
-                                </article>
-                            </div>
-                            <div class="col-md-4">
-                                <article class="international-news-big-content">
-                                    <a href="#">
-                                        <h1>इन्फ्लुएन्जाका कारण वालिङका १७ स्कुल एक हप्ताका लागि बन्द</h1>
-                                        <figure>
-                                            <img src="image/i1.jpg" alt="image">
-                                        </figure>
-                                    </a>
-                                </article>
-                            </div>
-                            <div class="col-md-4">
-                                <article class="international-news-big-content">
-                                    <a href="#">
-                                        <h1>इन्फ्लुएन्जाका कारण वालिङका १७ स्कुल एक हप्ताका लागि बन्द</h1>
-                                        <figure>
-                                            <img src="image/i2.jpg" alt="image">
-                                        </figure>
-                                    </a>
-                                </article>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -242,7 +157,7 @@
                     <header class="news-header">
                         <h2>
                             <span>
-                                <a href="second.html">देश</a>
+                                <a>राजनीति</a>
                             </span>
                         </h2>
                         <div class="clearfix"></div>
@@ -572,461 +487,4 @@
     </div>
 </div>
 
-<!--interview view famous start-->
-<div class="fl-ivf-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="fl-view-news">
-                    <header class="news-header">
-                        <h2>
-                            <span>
-                                <a href="second.html">विचार/ब्लग</a>
-                            </span>
-                        </h2>
-                        <div class="clearfix"></div>
-                    </header>
-
-                    <div class="view-with-image">
-                    <ul>
-                        <li>
-                            <figure>
-                                <img src="image/n1.jpg" class="img-responsive" alt="image">
-                            </figure>
-
-                            <div class="view-people-content">
-                                <a href="#">
-                                    <h4>भारतीय लेखकले दर्शाए नेपालबारे भारतकोतीन गम्भीर गल्ती</h4>
-                                </a>
-                                <p>-डा. शेखर कोइराला</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-
-                        <li>
-                            <figure>
-                                <img src="image/v1.jpg" class="img-responsive" alt="image">
-                            </figure>
-
-                            <div class="view-people-content">
-                                <a href="#">
-                                    <h4>भारतीय लेखकले दर्शाए नेपालबारे भारतकोतीन गम्भीर गल्ती</h4>
-                                </a>
-                                <p>-डा. शेखर कोइराला</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-
-                        <li>
-                            <figure>
-                                <img src="image/v1.jpg" class="img-responsive" alt="image">
-                            </figure>
-
-                            <div class="view-people-content">
-                                <a href="#">
-                                    <h4>भारतीय लेखकले दर्शाए नेपालबारे भारतकोतीन गम्भीर गल्ती</h4>
-                                </a>
-                                <p>-डा. शेखर कोइराला</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-
-                        <li>
-                            <figure>
-                                <img src="image/v1.jpg" class="img-responsive" alt="image">
-                            </figure>
-
-                            <div class="view-people-content">
-                                <a href="#">
-                                    <h4>भारतीय लेखकले दर्शाए नेपालबारे भारतकोतीन गम्भीर गल्ती</h4>
-                                </a>
-                                <p>-डा. शेखर कोइराला</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-
-                        <li>
-                            <figure>
-                                <img src="image/n1.jpg" class="img-responsive" alt="image">
-                            </figure>
-
-                            <div class="view-people-content">
-                                <a href="#">
-                                    <h4>भारतीय लेखकले दर्शाए नेपालबारे भारतकोतीन गम्भीर गल्ती</h4>
-                                </a>
-                                <p>-डा. शेखर कोइराला</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                    </ul>
-                </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="interview-wrapper">
-                    <header class="news-header">
-                        <h2>
-                            <span>
-                                <a href="second_page.html">अन्तर्वार्त</a>
-                            </span>
-                        </h2>
-                        <div class="clearfix"></div>
-                    </header>
-
-                    <div class="interview-content-inner">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="interview-block-big">
-                                    <figure>
-                                        <img src="image/e1.jpg" alt="image">
-                                    </figure>
-                                    <div class="interview-content">
-                                        <a href="#"><h1>नेपालकै ठूलो सिमेण्ट उद्योगसँग सरकारले गरेको सहमति पालना भएन</h1></a>
-                                        <p>साउन २२,काठमाडौं । ब्राजिलका स्टार फरवार्ड नेइमारलाई केहि दिन अघी मात्र अनुबन्ध गरेको nफ्रेन्च क्लब पेरिस सेन्ट जर्मेन साउन २२,काठमाडौं । ब्राजिलका स्टार फरवार्ड नेइमारलाई केहि दिन अघी मात्र अनुबन्ध गरेको फ्रेन्च क्लब पेरिस सेन्ट जर्मेन </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="interview-small">
-                                    <div class="col-md-12">
-                                        <div class="interview-image">
-                                            <figure>
-                                                <img src="image/e1.jpg" alt="image">
-                                            </figure>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="interview-inner-content">
-                                            <a href="#">
-                                                <h4>दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा  २’कोफस्ट लुक दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा २’को फस्ट लुक – नायिका सबै  दुलहीको– नायिका सबै दुलहीको भेषमा</h4>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="interview-small">
-                                    <div class="col-md-12">
-                                        <div class="interview-image">
-                                            <figure>
-                                                <img src="image/e1.jpg" alt="image">
-                                            </figure>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="interview-inner-content">
-                                            <a href="#">
-                                                <h4>दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा  २’कोफस्ट लुक दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा २’को फस्ट लुक – नायिका सबै  दुलहीको– नायिका सबै दुलहीको भेषमा</h4>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="famous-news">
-                    <header class="news-header">
-                        <h2>
-                            <span>
-                                <a href="second.html">लोकप्रिय</a>
-                            </span>
-                        </h2>
-                        <div class="clearfix"></div>
-                    </header>
-
-                    <div class="famous-news-section">
-                        <div role="tabpanel" class="tab-pane active" id="latest">
-                            <div class="famous-news-content-entry">
-                                <ul>
-                                    <li>
-                                        <div class="famous-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="famous-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="famous-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="famous-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="famous-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="famous-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="famous-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- famous view and interview ends-->
-
-<!-- advertisement start -->
-<div class="fl-advertisement-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="fl-advertisement-inner">
-                    <div class="col-md-3">
-                        <div class="fl-advertisement-image">
-                            <figure>
-                                <img src="image/adv6.gif">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="fl-advertisement-image">
-                            <figure>
-                                <img src="image/adv7.gif">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="fl-advertisement-image">
-                            <figure>
-                                <img src="image/adv8.jpg">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="fl-advertisement-image">
-                            <figure>
-                                <img src="image/adv6.gif">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="fl-advertisement-image">
-                            <figure>
-                                <img src="image/adv6.gif">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="fl-advertisement-image">
-                            <figure>
-                                <img src="image/adv7.gif">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="fl-advertisement-image">
-                            <figure>
-                                <img src="image/adv8.jpg">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="fl-advertisement-image">
-                            <figure>
-                                <img src="image/adv6.gif">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- advertisement ends -->
-
-<!-- share news -->
-<div class="fl-mix-share-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
-                <div class="share-wrapper">
-                    <header class="news-header">
-                        <h2>
-                            <span>
-                                <a href="second_page.html">शेयर मार्केट</a>
-                            </span>
-                        </h2>
-                        <div class="clearfix"></div>
-                    </header>
-
-                    <div class="share-content">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="share-big">
-                                    <figure>
-                                        <img src="image/e1.jpg" alt="image">
-                                    </figure>
-                                    <div class="share-content-inner">
-                                        <a href="#"><h1>नेपालकै ठूलो सिमेण्ट उद्योगसँग सरकारले गरेको सहमति पालना भएन</h1></a>
-                                        <p>साउन २२,काठमाडौं । ब्राजिलका स्टार फरवार्ड नेइमारलाई केहि दिन अघी मात्र अनुबन्ध गरेको nफ्रेन्च क्लब पेरिस सेन्ट जर्मेन साउन २२,काठमाडौं । ब्राजिलका स्टार फरवार्ड नेइमारलाई केहि दिन अघी मात्र अनुबन्ध गरेको फ्रेन्च क्लब पेरिस सेन्ट जर्मेन </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="share-small">
-                                    <figure>
-                                        <img src="image/e1.jpg" alt="image">
-                                    </figure>
-                                    <a href="#">
-                                        <h4>दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा  २’कोफस्ट लुक दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा २’को फस्ट लुक – नायिका सबै  दुलहीको– नायिका सबै दुलहीको भेषमा</h4>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="share-small">
-                                    <figure>
-                                        <img src="image/e1.jpg" alt="image">
-                                    </figure>
-                                    <a href="#">
-                                        <h4>दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा  २’कोफस्ट लुक दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा २’को फस्ट लुक – नायिका सबै  दुलहीको– नायिका सबै दुलहीको भेषमा</h4>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="share-small">
-                                    <figure>
-                                        <img src="image/e1.jpg" alt="image">
-                                    </figure>
-                                    <a href="#">
-                                        <h4>दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा  २’कोफस्ट लुक दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा २’को फस्ट लुक – नायिका सबै  दुलहीको– नायिका सबै दुलहीको भेषमा</h4>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="share-small">
-                                    <figure>
-                                        <img src="image/news_03.jpg" alt="image">
-                                    </figure>
-                                    <a href="#">
-                                        <h4>दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा  २’कोफस्ट लुक दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा २’को फस्ट लुक – नायिका सबै  दुलहीको– नायिका सबै दुलहीको भेषमा</h4>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="share-small">
-                                    <figure>
-                                        <img src="image/e1.jpg" alt="image">
-                                    </figure>
-                                    <a href="#">
-                                        <h4>दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा  २’कोफस्ट लुक दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा २’को फस्ट लुक – नायिका सबै  दुलहीको– नायिका सबै दुलहीको भेषमा</h4>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="sidebar-prabash-news">
-                    <header class="news-header">
-                        <h2>
-                            <span>
-                                <a href="second.html">प्रवास</a>
-                            </span>
-                        </h2>
-                        <div class="clearfix"></div>
-                    </header>
-
-                    <div class="sidebar-prabesh-news-section">
-                        <div role="tabpanel" class="tab-pane active" id="latest">
-                            <div class="sidebar-prabesh-news-content">
-                                <ul>
-                                    <li>
-                                        <div class="prabesh-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="prabesh-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="prabesh-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="prabesh-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="prabesh-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="prabesh-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="prabesh-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}

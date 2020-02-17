@@ -98,12 +98,14 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="fl-menu-content collapse navbar-collapse " id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav active">
-                            <li class="active"><a href="{% url 'index' %}">गृहपृष्‍ठ</a></li>
+                            <li {% if request.path == '/' %} class="active"{% endif %}><a href="{% url 'index' %}">गृहपृष्‍ठ</a></li>
                             {% for category in categories %}
 
-                            <li><a href="{% url 'category' category.slug %}">{{category.title}}</a></li>
+                            <li {% if request.path == '/category/'|add:category.slug %} class="active"{% endif %}>
+                            <a href="{% url 'category' category.slug %}">{{category.title}}</a>
+                            </li>
                             {% endfor %}
-
+                            <li {% if request.path == '/contact/' %} class="active"{% endif %}><a href="{% url 'contact' %}">सम्पर्क</a></li>
                         </ul>
                     </div>
                      <!-- /.navbar-collapse -->
@@ -112,36 +114,6 @@
         </div>
     </div>
 </nav>
-
-<!-- advertisement1 -->
-<section class="fl-advertisement1-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="logo-ads1-banner">
-                    <figure>
-                        <img src="image/adv.jpg" alt="ad image">
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- advertisement1 -->
-<section class="fl-advertisement2-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="logo-ads2-banner">
-                    <figure>
-                        <img src="image/adv2.png" alt="ad image">
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 		{% block 'body' %} {% endblock %}
 
 <!-- footer -->

@@ -24,6 +24,7 @@ STATUS_BUTTON= [
 class Category(models.Model):
     title = models.CharField(max_length=100, unique=True, validators=[customLengthValidator, atValidator, ])
     slug = models.SlugField(max_length=100, unique=True,  validators=[customLengthValidator, atValidator, ])
+    rank = models.IntegerField(default=1)
     status = models.BooleanField(default=True)
     menu_display = models.BooleanField(default=True)
     def __str__(self):
@@ -39,6 +40,8 @@ class News(models.Model):
     image = models.ImageField(upload_to='news/', null=True, blank=True)
     publish_date = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=True)
+    main_news = models.BooleanField(default=True)
+    slider = models.BooleanField(default=True)
 
     # auto now provide today date
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
