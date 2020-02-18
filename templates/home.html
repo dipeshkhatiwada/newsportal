@@ -19,6 +19,8 @@
                             <h2><a href="#">{{slider.title}}</a></h2>
                             {% if slider.image %}
                                 <a href="#"><img src="{{MEDIA_URL}}{{slider.image.url}}" alt=""></a>
+                            {% else %}
+                                    NO image
                             {% endif %}
                         </div>
                     {% endfor %}
@@ -51,7 +53,11 @@
                             <a href="#">
                                 <h1>{{main_news1}}&nbsp;</h1>
                                 <figure>
-                                    {% comment %} <img src="{{MEDIA_URL}}{{main_news[0].image}}" alt="image"> {% endcomment %}
+                                    {% if main_news1.image %}
+                                        <img src="{{MEDIA_URL}}{{main_news1.image.url}}" alt="image">
+                                    {% else %}
+                                        NO image
+                                    {% endif %}
                                 </figure>
                             </a>
                             <p>२१ साउन, काठमाडौं । अहिले बैंक तथा वित्तीय संस्थाहरुले धमाधम वित्तीय विवरणहरु प्रकाशित गरिरहेका छन् । वित्तीय विवरणमा दिइएका तथ्यांकहरुले मोटामोटी रुपमा संस्थाको अवस्था कस्तो
@@ -67,7 +73,11 @@
                                             <div class="row">
                                                 <div class="col-md-5 col-sm-4">
                                                     <figure>
-                                                        <img src="{{MEDIA_URL}}{{m_news.image}}" alt="image">
+                                                        {% if m_news.image %}
+                                                            <img src="{{MEDIA_URL}}{{m_news.image.url}}" alt="image">
+                                                        {% else %}
+                                                            NO image
+                                                        {% endif %}
                                                     </figure>
                                                 </div>
                                                 <div class="col-md-7 col-sm-8">
@@ -127,7 +137,7 @@
                      <header class="news-header">
                         <h2>
                             <span>
-                                <a href="second.html">अन्तराष्ट्रिय समाचार</a>
+                                <a href="{% url 'category' category.slug1 %}">{{category.title1}}</a>
                             </span>
                         </h2>
                         <div class="clearfix"></div>
@@ -141,7 +151,11 @@
                                     <a href="{% url 'news' news1.slug %}">
                                         <h1>{{news1.title}}</h1>
                                         <figure>
-                                            <img src="{{MEDIA_URL}}{{news1.image}}" alt="{{news1.title}}">
+                                            {% if news1.image %}
+                                                <img src="{{MEDIA_URL}}{{news1.image.url}}" alt="image">
+                                            {% else %}
+                                                NO image
+                                            {% endif %}
                                         </figure>
                                     </a>
                                      <p>{{m_news.description | truncatewords:20}}</p>
@@ -157,7 +171,7 @@
                     <header class="news-header">
                         <h2>
                             <span>
-                                <a>राजनीति</a>
+                                <a href="{% url 'category' category.slug2 %}">{{category.title2}}</a>
                             </span>
                         </h2>
                         <div class="clearfix"></div>
@@ -167,59 +181,25 @@
                         <!-- <div role="tabpanel" class="tab-pane active" id="latest"> -->
                         <div class="sidebar-country-news-content">
                             <ul>
+                                {% for news2 in cat2_news %}
                                 <li>
                                     <figure>
-                                        <img src="image/c1.jpeg">
+                                        {% if news2.image %}
+                                            <img src="{{MEDIA_URL}}{{news2.image.url}}" alt="image">
+                                        {% else %}
+                                            NO image
+                                        {% endif %}
                                     </figure>
                                     <div class="country-news-content">
-                                        <a href="#">
-                                            <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
+                                        <a href="{% url 'news' news2.slug %}">
+                                            <h4> {{news2.title}}</h4>
                                         </a>
                                     </div>
                                 </li>
+                            {% endfor %}
 
-                                <li>
-                                    <figure>
-                                        <img src="image/c1.jpeg">
-                                    </figure>
-                                    <div class="country-news-content">
-                                        <a href="#">
-                                            <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                        </a>
-                                    </div>
-                                </li>
 
-                                <li>
-                                    <figure>
-                                        <img src="image/c1.jpeg">
-                                    </figure>
-                                    <div class="country-news-content">
-                                        <a href="#">
-                                            <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                        </a>
-                                    </div>
-                                </li>
-                                 <li>
-                                    <figure>
-                                        <img src="image/c1.jpeg">
-                                    </figure>
-                                    <div class="country-news-content">
-                                        <a href="#">
-                                            <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                        </a>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <figure>
-                                        <img src="image/c1.jpeg">
-                                    </figure>
-                                    <div class="country-news-content">
-                                        <a href="#">
-                                            <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                        </a>
-                                    </div>
-                                </li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -238,7 +218,7 @@
                     <header class="news-header">
                         <h2>
                             <span>
-                                <a href="second_page.html">आर्थिक</a>
+                                <a href="{% url 'category' category.slug3 %}">{{category.title3}}</a>
                             </span>
                         </h2>
                         <div class="clearfix"></div>
@@ -249,65 +229,35 @@
                             <div class="col-md-6">
                                 <div class="mixed-economic-big">
                                     <figure>
-                                        <img src="image/e1.jpg" alt="image">
+                                        {% if cat3_first_news.image %}
+                                            <img src="{{MEDIA_URL}}{{cat3_first_news.image.url}}" alt="image">
+                                        {% else %}
+                                            NO image
+                                        {% endif %}
                                     </figure>
                                     <div class="economic-content">
-                                        <a href="#"><h1>नेपालकै ठूलो सिमेण्ट उद्योगसँग सरकारले गरेको सहमति पालना भएन</h1></a>
-                                        <p>साउन २२,काठमाडौं । ब्राजिलका स्टार फरवार्ड नेइमारलाई केहि दिन अघी मात्र अनुबन्ध गरेको nफ्रेन्च क्लब पेरिस सेन्ट जर्मेन साउन २२,काठमाडौं । ब्राजिलका स्टार फरवार्ड नेइमारलाई केहि दिन अघी मात्र अनुबन्ध गरेको फ्रेन्च क्लब पेरिस सेन्ट जर्मेन </p>
+                                        <a href="{% url 'news' cat3_first_news.slug %}"><h1>{{cat3_first_news.title}}</h1></a>
+                                        <p>{{cat3_first_news.description| truncatewords:20 }}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="mixed-economic-small">
-                                    <figure>
-                                        <img src="image/e1.jpg" alt="image">
-                                    </figure>
-                                    <a href="#">
-                                        <h4>दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा  २’कोफस्ट लुक दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा २’को फस्ट लुक – नायिका सबै  दुलहीको– नायिका सबै दुलहीको भेषमा</h4>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mixed-economic-small">
-                                    <figure>
-                                        <img src="image/e1.jpg" alt="image">
-                                    </figure>
-                                    <a href="#">
-                                        <h4>दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा  २’कोफस्ट लुक दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा २’को फस्ट लुक – नायिका सबै  दुलहीको– नायिका सबै दुलहीको भेषमा</h4>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mixed-economic-small">
-                                    <figure>
-                                        <img src="image/e1.jpg" alt="image">
-                                    </figure>
-                                    <a href="#">
-                                        <h4>दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा  २’कोफस्ट लुक दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा २’को फस्ट लुक – नायिका सबै  दुलहीको– नायिका सबै दुलहीको भेषमा</h4>
-                                    </a>
-                                </div>
-                            </div>
+                                {% for news3 in cat3_side_news %}
 
                             <div class="col-md-6">
                                 <div class="mixed-economic-small">
                                     <figure>
-                                        <img src="image/news_03.jpg" alt="image">
+                                        {% if news3.image %}
+                                        <img src="{{MEDIA_URL}}{{news3.image.url}}" alt="image">
+                                        {% else %}
+                                        NO image
+                                        {% endif %}
                                     </figure>
-                                    <a href="#">
-                                        <h4>दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा  २’कोफस्ट लुक दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा २’को फस्ट लुक – नायिका सबै  दुलहीको– नायिका सबै दुलहीको भेषमा</h4>
+                                    <a href="{% url 'news' news3.slug %}">
+                                        <h4>{{news3.title}}</h4>
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="mixed-economic-small">
-                                    <figure>
-                                        <img src="image/e1.jpg" alt="image">
-                                    </figure>
-                                    <a href="#">
-                                        <h4>दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा  २’कोफस्ट लुक दीपाश्रीले सार्वजनिक गरीन ‘छक्कापञ्जा २’को फस्ट लुक – नायिका सबै  दुलहीको– नायिका सबै दुलहीको भेषमा</h4>
-                                    </a>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -317,7 +267,7 @@
                     <header class="news-header">
                         <h2>
                             <span>
-                                <a href="second.html">लोकप्रिय</a>
+                                <a href="{% url 'category' category.slug4 %}">{{category.title4}}</a>
                             </span>
                         </h2>
                         <div class="clearfix"></div>
@@ -327,57 +277,15 @@
                         <div role="tabpanel" class="tab-pane active" id="latest">
                             <div class="sidebar-country-news-content">
                                 <ul>
+                                {% for news4 in cat4_side_news %}
                                     <li>
                                         <div class="country-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
+                                            <a href="{% url 'news' news4.slug %}">
+                                                <h4>{% url 'news' news4.slug %}</h4>
                                             </a>
                                         </div>
                                     </li>
-
-                                    <li>
-                                        <div class="country-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="country-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="country-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="country-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="country-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="country-news-content">
-                                            <a href="#">
-                                                <h4> जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम जापनिज इन्सेफ्लाइटिसका यस्ता छन् लक्षण र रोकथाम</h4>
-                                            </a>
-                                        </div>
-                                    </li>
+                                {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -412,7 +320,7 @@
                     <header class="news-header">
                         <h2>
                             <span>
-                                <a href="second.html">स्वास्थ्य</a>
+                                <a href="{% url 'category' category.slug5 %}">{{category.title5}}</a>
                             </span>
                         </h2>
                         <div class="clearfix"></div>
@@ -420,65 +328,19 @@
 
                     <div class="health-news-slider">
                         <div class="owl-carousel owl-theme type1">
+                        {% for news5 in cat5_side_news %}
                             <div class="item">
                                 <div class="health-news-detail">
                                     <figure>
-                                        <img src="image/h1.jpg" alt="image">
+                                        <img src="{{MEDIA_URL}}{{news5.image.url}}" alt="image">
                                     </figure>
 
-                                    <a href="#">
-                                        <h1>छालाको रोगमा खानाको महत्व</h1>
+                                    <a href="{% url 'news' news5.slug %}">
+                                        <h1>{{news5.title}}</h1>
                                     </a>
                                 </div>
                             </div>
-
-                            <div class="item">
-                                <div class="health-news-detail">
-                                    <figure>
-                                        <img src="image/h2.jpg" alt="image">
-                                    </figure>
-
-                                    <a href="#">
-                                        <h1>यस्ता छन् आँखा स्वास्थ्य सम्वन्धी थाह पाउँनै पर्ने २५ तथ्य र ११ सन्देश</h1>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="health-news-detail">
-                                    <figure>
-                                        <img src="image/h1.jpg" alt="image">
-                                    </figure>
-
-                                    <a href="#">
-                                        <h1>यी हुन् गर्मीमा उपयोगी ६ तरकार</h1>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="health-news-detail">
-                                    <figure>
-                                        <img src="image/h2.jpg" alt="image">
-                                    </figure>
-
-                                    <a href="#">
-                                        <h1>यस्ता छन् आँखा स्वास्थ्य सम्वन्धी थाह पाउँनै पर्ने २५ तथ्य र ११ सन्देश</h1>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="health-news-detail">
-                                    <figure>
-                                        <img src="image/h3.jpg" alt="image">
-                                    </figure>
-
-                                    <a href="#">
-                                        <h1>अनुहार चम्किलो बनाउने १० घरेलु तरिका कर्णालीमा अस्पताल नपुग्दै जान्छ बिरामीको ज्यान, तीन महिनाका यी कर्णालीमा अस्पता नपुग्दै जान्छ बिरामीको ज्यान, तीन महिनाका यी </h1>
-                                    </a>
-                                </div>
-                            </div>
+                        {% endfor %}
                         </div>
                     </div>
                 </div>
