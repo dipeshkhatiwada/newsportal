@@ -15,7 +15,7 @@ def list_category(request):
     }
     return render(request, 'backend/category/list.html', context)
 
-
+@login_required(login_url='signin')
 def create_category(request):
     form = NewsCategoryForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -27,7 +27,7 @@ def create_category(request):
     }
     return render(request, 'backend/category/create.html', context)
 
-
+@login_required(login_url='signin')
 def edit_category(request, id):
     data = Category.objects.get(pk=id)
     form = NewsCategoryForm(request.POST or None, request.FILES or None, instance=data)
@@ -41,14 +41,14 @@ def edit_category(request, id):
     }
     return render(request, 'backend/category/edit.html', context)
 
-
+@login_required(login_url='signin')
 def delete_category(request, id):
     category = Category.objects.get(pk=id)
     category.delete()
     messages.add_message(request, messages.SUCCESS, "Category successfully deleted")
     return redirect('category')
 
-
+@login_required(login_url='signin')
 def list_news(request):
     data = News.objects.all()[::-1]
     context = {
@@ -56,7 +56,7 @@ def list_news(request):
     }
     return render(request, 'backend/news/list.html', context)
 
-
+@login_required(login_url='signin')
 def create_news(request):
     form = NewsForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -68,7 +68,7 @@ def create_news(request):
     }
     return render(request, 'backend/news/create.html', context)
 
-
+@login_required(login_url='signin')
 def edit_news(request, id):
     data = News.objects.get(pk=id)
     form = NewsForm(request.POST or None, request.FILES or None, instance=data)
@@ -82,7 +82,7 @@ def edit_news(request, id):
     }
     return render(request, 'backend/news/edit.html', context)
 
-
+@login_required(login_url='signin')
 def delete_news(request, id):
     news = News.objects.get(pk=id)
     news.delete()

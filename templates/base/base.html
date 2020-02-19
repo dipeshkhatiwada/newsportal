@@ -64,7 +64,7 @@
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <div class="logo-ads">
                         <figure>
-                            <img src="{% static 'image/1.jpg' %}" alt="ad image">
+                            <img src="{{MEDIA_URL}}{{adds_media.top_with_logo.image.url}}" alt="{{adds_media.top_with_logo.name}}">
                         </figure>
                     </div>
                 </div>
@@ -116,6 +116,21 @@
         </div>
     </div>
 </nav>
+<!-- advertisement1 -->
+<section class="fl-advertisement1-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="logo-ads1-banner">
+                    <figure>
+                        <img src="{{MEDIA_URL}}{{adds_media.below_menu_long.image.url}}" alt="{{adds_media.below_menu_long.name}}">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- advertisement1 -->
 		{% block 'body' %} {% endblock %}
 
 <!-- footer -->

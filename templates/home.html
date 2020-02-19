@@ -93,23 +93,7 @@
                     </section>
                 </div>
             </div>
-
-           <div class="col-md-3">
-                <div class="place-for-ads">
-                    <figure>
-                        <img src="{% static 'image/adv3.jpg' %}">
-                    </figure>
-                     <figure>
-                        <img src="{% static 'image/adv4.jpg' %}">
-                    </figure>
-                     <figure>
-                        <img src="{% static 'image/adv5.jpg' %}">
-                    </figure>
-                     <figure>
-                        <img src="{% static 'image/adv3.jpg' %}">
-                    </figure>
-                </div>
-            </div>
+            {% include 'component/adds.html' %}
         </div>
     </div>
 </div>
@@ -120,7 +104,7 @@
             <div class="col-md-12">
                 <div class="logo-ads3-banner">
                     <figure>
-                        <img src="image/adv2.png" alt="ad image">
+                        <img src="{{MEDIA_URL}}{{adds_media.home_add_1.image.url}}" alt="{{adds_media.home_add_1.name}}">
                     </figure>
                 </div>
             </div>
@@ -303,7 +287,7 @@
             <div class="col-md-12">
                 <div class="logo-ads3-banner">
                     <figure>
-                        <img src="image/adv2.png" alt="ad image">
+                        <img src="{{MEDIA_URL}}{{adds_media.home_add_2.image.url}}" alt="{{adds_media.home_add_2.name}}">
                     </figure>
                 </div>
             </div>

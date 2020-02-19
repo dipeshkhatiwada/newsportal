@@ -15,7 +15,7 @@ def list_advertisement(request):
     }
     return render(request, 'backend/advertisement/list.html', context)
 
-
+@login_required(login_url='signin')
 def create_advertisement(request):
     form = AdvertisementForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -27,7 +27,7 @@ def create_advertisement(request):
     }
     return render(request, 'backend/advertisement/create.html', context)
 
-
+@login_required(login_url='signin')
 def edit_advertisement(request, id):
     data = Advertisement.objects.get(pk=id)
     form = AdvertisementForm(request.POST or None, request.FILES or None, instance=data)
@@ -41,7 +41,7 @@ def edit_advertisement(request, id):
     }
     return render(request, 'backend/advertisement/edit.html', context)
 
-
+@login_required(login_url='signin')
 def delete_advertisement(request, id):
     advertisement = Advertisement.objects.get(pk=id)
     advertisement.delete()

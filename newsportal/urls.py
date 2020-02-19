@@ -24,6 +24,7 @@ urlpatterns = [
     path('login/', views.signin, name='signin'),
     path('logout/', views.signout, name='signout'),
     path('backend/dashboard/', views.dashboard, name='dashboard'),
+    path('backend/change_password/', views.change_password, name='change_password'),
 
 
     ############backend#######

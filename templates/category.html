@@ -41,23 +41,7 @@
                     
                 </div>
             </div>
-
-            <div class="col-md-3">
-                <div class="place-for-ads">
-                    <figure>
-                        <img src="image/adv3.jpg">
-                    </figure>
-                     <figure>
-                        <img src="image/adv4.jpg">
-                    </figure>
-                     <figure>
-                        <img src="image/adv5.jpg">
-                    </figure>
-                     <figure>
-                        <img src="image/adv3.jpg">
-                    </figure>
-                </div>
-            </div>
+            {% include 'component/adds.html' %}
                 {% if news.has_other_pages %}
                 <ul class="pagination">
                     {% if news.has_previous %}

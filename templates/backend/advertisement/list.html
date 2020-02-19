@@ -11,7 +11,7 @@
             <div class="col-md-12">
                 <h4 class="animated fadeInLeft">
                     Advertisement <span class="fa-angle-right fa"></span> List
-                    <a href="{% url 'create_advertisement' %}" class="btn btn-3d btn-primary"><span class="fa fa-plus"></span> Create</a>
+                    {% comment %} <a href="{% url 'create_advertisement' %}" class="btn btn-3d btn-primary"><span class="fa fa-plus"></span> Create</a> {% endcomment %}
                 </h4>
                 {% include 'component/message.html' %}
 
@@ -30,7 +30,7 @@
                         <thead>
                           <tr>
                             <th></th>
-                            <th>Link</th>
+                            <th>Name</th>
                             <th>Image</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -42,12 +42,12 @@
 
                           <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{advertisement.link}}</td>
+                            <td>{{advertisement.name}}</td>
                             <td>
-                            {%  if advertisement.image %}
-                              <img src="{{MEDIA_URL}}{{advertisement.image.url}}" alt="image" width="100px">
+                            {% if advertisement.image %}
+                                <img src="{{MEDIA_URL}}{{advertisement.image.url}}" alt="{{advertisement.image.url}}" height="100px" width="200px">
                             {% else %}
-                              NO Image
+                                NO image
                             {% endif %}
                             </td>
                             <td>
@@ -60,7 +60,7 @@
                             </td>
                             <td width="20%">
                                 
-                              <a href="" class="btn btn-3d btn-danger" data-toggle="modal" data-target="#myModal_{{advertisement.id}}"><i class="fa fa-trash"></i></a>
+                              {% comment %} <a href="" class="btn btn-3d btn-danger" data-toggle="modal" data-target="#myModal_{{advertisement.id}}"><i class="fa fa-trash"></i></a> {% endcomment %}
                               <a href="{% url 'edit_advertisement'  advertisement.id %}" class="btn btn-3d btn-primary"><i class="fa fa-pencil"></i></a>
                             
                               <div class="modal fade" id="myModal_{{advertisement.id}}" role="dialog">

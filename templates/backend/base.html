@@ -68,6 +68,8 @@
                 <li class="dropdown avatar-dropdown">
                     <img src="/static/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                     <ul class="dropdown-menu user-dropdown">
+                         <li class="more"><a href="{% url 'change_password' %}"><span class="fa fa-user"></span> Change Password</a></li>
+
                       <li class="more">
                        <ul>
                          <li><a href="{% url 'signout' %}"><span class="fa fa-sign-out"></span> Log out</a></li>
@@ -112,14 +114,7 @@
                         </ul>
                       </li>
                       <li class="active ripple">
-                        <a class="tree-toggle nav-header">
-                          <span class="fa fa-align-center "></span> Advertisement 
-                          <span class="fa-angle-right fa right-arrow text-right"></span> 
-                        </a>
-                        <ul class="nav nav-list {% if request.path == '/backend/advertisement/' %} tree{% endif %}">
-                          <li><a href="{% url 'create_advertisement' %}"> <span class="fa fa-plus"></span> Create</a></li>
-                          <li><a href="{% url 'advertisement' %}">  <span class="fa fa-list"></span> List</a></li>
-                        </ul>
+                      <a href="{% url 'advertisement' %}"><span class="fa fa-align-center"></span>Advertisement</a>
                       </li>
                       {% if request.user.is_superuser == True %}
                         <li class="ripple">

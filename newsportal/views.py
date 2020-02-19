@@ -4,10 +4,13 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from newspost.models import Category,News
+from advertisement.models import Advertisement
 from contact.models import Contact
 from contact.forms import ContactForm
 from django.db.models import Sum, Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 import requests
 
 
@@ -18,9 +21,16 @@ def contact(request):
         form.save()
         messages.add_message(request, messages.SUCCESS, "सन्देश सफलतापूर्वक सबमिट गरियो")
         return redirect('contact')
+    ######adds########
+    all_adds = Advertisement.objects.all().order_by('id')
+    adds_media = {
+        'top_with_logo' : all_adds[0],
+        'below_menu_long' : all_adds[1],
+    }
     context = {
         'categories': data,
-        'forms': form
+        'forms': form,
+        'adds_media': adds_media,
     }
     return render(request, 'contact.html',context)
 
@@ -50,6 +60,19 @@ def home(request):
         'title5' : data[4].title,
         'slug5' : data[4].slug,
     }
+    ######adds########
+    all_adds = Advertisement.objects.all().order_by('id')
+    adds_media = {
+        'top_with_logo' : all_adds[0],
+        'below_menu_long' : all_adds[1],
+        'side_add_1': all_adds[2],
+        'side_add_2': all_adds[3],
+        'side_add_3': all_adds[4],
+        'side_add_4': all_adds[5],
+        'home_add_1': all_adds[6],
+        'home_add_2': all_adds[7],
+    }
+    
     context = {
         'category': category,
         'categories': data,
@@ -62,6 +85,8 @@ def home(request):
         'cat3_side_news': cat3_side_news,
         'cat4_news': cat4_news,
         'cat5_news': cat5_news,
+
+        'adds_media': adds_media,
     }
     return render(request, 'home.html', context)
 
@@ -78,12 +103,21 @@ def category(request,slug):
         cats = paginator.page(1)
     except EmptyPage:
         cats = paginator.page(paginator.num_pages)
-
-
+    ######adds########
+    all_adds = Advertisement.objects.all().order_by('id')
+    adds_media = {
+        'top_with_logo' : all_adds[0],
+        'below_menu_long' : all_adds[1],
+        'side_add_1': all_adds[2],
+        'side_add_2': all_adds[3],
+        'side_add_3': all_adds[4],
+        'side_add_4': all_adds[5],
+    }
     context = {
         'categories': data,
         'cat':cat.title,
-        'news': cats
+        'news': cats,
+        'adds_media': adds_media,
     }
     return render(request, 'category.html', context)
 def news(request,slug):
@@ -100,6 +134,8 @@ def news(request,slug):
 
 
 def signin(request):
+    if request.user.id:
+        return redirect('dashboard')
     if request.method == 'GET':
         return render(request, 'backend/login.html')
     else:
@@ -123,6 +159,48 @@ def signout(request):
     logout(request)
     return redirect('signin')
 
+@login_required(login_url='signin')
+def change_password(request):
+    if request.method == 'GET':
+        form = PasswordChangeForm(request.user)
+        {'forms': form}
+        return render(request, 'backend/change_password.html',{'forms': form})
+    else:
+        form = PasswordChangeForm(request.user, request.POST)
+        if request.POST.get('new_password1') == request.POST.get('new_password2'):
+            if form.is_valid():
+                user = form.save()
+                update_session_auth_hash(request, user)  # Important!
+                messages.add_message(request, messages.SUCCESS, "Your password was successfully updated!")
+                return redirect('change_password')
+            else:
+                messages.add_message(request, messages.ERROR, "Old password doesn't match")
+                return redirect('change_password')
+                
+        else:
+            messages.add_message(request, messages.ERROR, "Password and Confirm doesn't match")
+            return redirect('change_password')
+
+
+        # old_pass = request.POST.get('old_password')
+        # new_pass1 = request.POST.get('password1')
+        # new_pass2 = request.POST.get('password2')
+        # # u = request.POST['username']
+        # user = authenticate(username=request.user.username, password=old_pass)
+        # if user is not None:
+        #     if new_pass1 == new_pass2:
+        #         user = User.objects.get(id=request.user.id)
+        #         print(user)
+        #         user.set_password(new_pass1)
+        #         messages.add_message(request, messages.SUCCESS, "Password Changed Successfully")
+        #         return redirect("dashboard")
+        #     else:
+        #         messages.add_message(request, messages.ERROR, "Password and Confirm doesn't match")
+        #         return redirect("change_password")
+        # else:
+        #     messages.add_message(request, messages.ERROR, "Old password doesn't match")
+        #     return redirect("change_password")
+
 
 @login_required(login_url='signin')
 def list_user(request):
@@ -131,6 +209,7 @@ def list_user(request):
         'users': data
     }
     return render(request, 'backend/user/list.html', context)
+@login_required(login_url='signin')
 def add_user(request):
     if request.method == 'GET':
         return render(request, 'backend/user/create.html')
@@ -155,6 +234,7 @@ def add_user(request):
         else:
             messages.add_message(request, messages.ERROR, "Password doesn't match")
             return redirect("create_user")
+@login_required(login_url='signin')
 def edit_user(request,id):
     if request.method == 'GET':
         data = User.objects.get(pk=id)
@@ -175,7 +255,7 @@ def edit_user(request,id):
         return redirect("user")
 
 
-
+@login_required(login_url='signin')
 def dashboard(request):
     no_user = User.objects.filter(is_active=True).aggregate(Count('id'))
     no_message = Contact.objects.filter(status=False).aggregate(Count('id'))
