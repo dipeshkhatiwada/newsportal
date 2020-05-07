@@ -31,6 +31,14 @@ class Category(models.Model):
         return self.title
 
 
+class Tag(models.Model):
+    title = models.CharField(max_length=100, unique=True, validators=[customLengthValidator, atValidator, ])
+    slug = models.SlugField(max_length=100, unique=True,  validators=[customLengthValidator, atValidator, ])
+    rank = models.IntegerField(default=1)
+    status = models.BooleanField(default=True)
+    def __str__(self):
+        return self.title
+
 class News(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=100, unique=True,  validators=[customLengthValidator, atValidator, ])
@@ -45,17 +53,11 @@ class News(models.Model):
 
     # auto now provide today date
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag, null=True, blank=True)
 
     # django will atomically add _id in foreign key
 
     def __str__(self):
         return self.title
 
-    # class Meta:
-        
-        # fields = ['__all__']
-        # widgets = {'view_count': forms.HiddenInput()}
-        # it will name the database table
-# from django.db import models
 
-# # Create your models here.

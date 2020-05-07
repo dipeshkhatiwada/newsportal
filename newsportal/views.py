@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from newspost.models import Category,News
+from newspost.models import Category,News,Tag
 from advertisement.models import Advertisement
 from contact.models import Contact
 from contact.forms import ContactForm
@@ -123,11 +123,53 @@ def category(request,slug):
 def news(request,slug):
     data = Category.objects.filter(status=1, menu_display=1)
     news = News.objects.get(slug=slug)
+    tags = news.tags.all()
+    ######adds########
+    all_adds = Advertisement.objects.all().order_by('id')
+    adds_media = {
+        'top_with_logo': all_adds[0],
+        'below_menu_long': all_adds[1],
+        'side_add_1': all_adds[2],
+        'side_add_2': all_adds[3],
+        'side_add_3': all_adds[4],
+        'side_add_4': all_adds[5],
+    }
     context = {
         'categories': data,
-        'news': news
+        'news': news,
+        'tags': tags,
+        'adds_media': adds_media,
     }
     return render(request, 'news.html', context)
+def tag(request,slug):
+    data = Category.objects.filter(status=1, menu_display=1)
+    cat = Tag.objects.get(slug=slug)
+    news = cat.news_set.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(news, 5)
+    try:
+        tag_news = paginator.page(page)
+    except PageNotAnInteger:
+        tag_news = paginator.page(1)
+    except EmptyPage:
+        tag_news = paginator.page(paginator.num_pages)
+    ######adds########
+    all_adds = Advertisement.objects.all().order_by('id')
+    adds_media = {
+        'top_with_logo': all_adds[0],
+        'below_menu_long': all_adds[1],
+        'side_add_1': all_adds[2],
+        'side_add_2': all_adds[3],
+        'side_add_3': all_adds[4],
+        'side_add_4': all_adds[5],
+    }
+    context = {
+        'categories': data,
+        'cat': cat.title,
+        'news': tag_news,
+        'adds_media': adds_media,
+    }
+    return render(request, 'category.html', context)
 
 
 

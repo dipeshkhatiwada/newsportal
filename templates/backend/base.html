@@ -105,6 +105,16 @@
                       </li>
                     <li class="active ripple">
                         <a class="tree-toggle nav-header">
+                          <span class="fa fa-table "></span> Tag
+                          <span class="fa-angle-right fa right-arrow text-right"></span>
+                        </a>
+                        <ul class="nav nav-list tree">
+                          <li><a href="{% url 'create_tag' %}"> <span class="fa fa-plus"></span> Create</a></li>
+                          <li><a href="{% url 'tag' %}">  <span class="fa fa-list"></span> List</a></li>
+                        </ul>
+                      </li>
+                    <li class="active ripple">
+                        <a class="tree-toggle nav-header">
                           <span class="fa fa-rss "></span> News 
                           <span class="fa-angle-right fa right-arrow text-right"></span> 
                         </a>

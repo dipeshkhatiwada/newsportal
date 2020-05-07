@@ -300,7 +300,7 @@ p.quote{
  .form-signin-wrapper{
   background: #FF0099 ;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #07177d, #FF0099);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #07177d, #FF0099) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #07177d94, #ff00994d) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   
   }
  .form-signin{
@@ -312,9 +312,8 @@ p.quote{
     .form-signin .btn{margin-top: 30px;}
     .form-signin .form-group{margin-bottom: 20px !important;}
     .form-signin .panel{
-      background: linear-gradient(to right, #07177d, #FF0099) !important;  
-      background: #07177d;
-      color: #fff;padding: 10px;
+      background: linear-gradient(to right, #07177d9e, #ff0099c2)!important;  
+      color: #fff;
       border:none !important;
       box-shadow: 0 9px 16px #07177d, 0 3px 5px #FF0099;
     }
@@ -6114,7 +6113,8 @@ ul li a:focus {
   border: none;
   background:none;
   border-bottom: 1px solid #757575;
-  background: #94a0eb;
+  background: #fff;
+  color:#111;
 }
 
 .form-group.form-animate-text .form-text:focus {

@@ -50,10 +50,30 @@
                         </div>
                     </div>
                 </div>
+
+            <div class="row">
+                    <div class="col-md-12">
+                        <header class="news-header">
+                            <h2>सम्बन्धित ट्यागहरू</h2>
+                            <div class="clearfix"></div>
+                        </header>
+                    </div>
+                    {% for tag in tags %}
+
+                    <div class="col-md-2">
+                        <div class="page-related-news-detail">
+                            <h2>
+                                <a  href="{% url 'tag' tag.slug %}">{{tag.title}}</a> ,
+                            </h2>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
                   <div class="row">
                     <div class="col-md-12">
                         <div class="contact-form">
-                            <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="" data-numposts="5"></div>
+                            <h3>यसमा तपाइको मत</h3>
+                            <div class="fb-comments" data-href="https://dipesh.com{{ request.get_full_path }}" data-width="100%" data-numposts="5"></div>
                         </div>
                     </div>
                 </div>

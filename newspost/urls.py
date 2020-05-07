@@ -12,4 +12,10 @@ urlpatterns = [
     path('news/delete/<int:id>',views.delete_news,name='delete_news'),
     path('news/edit/<int:id>',views.edit_news,name='edit_news'),
 
+
+    path('tag/',views.list_tag,name='tag'),
+    path('tag/create/',views.create_tag,name='create_tag'),
+    path('tag/delete/<int:id>',views.delete_tag,name='delete_tag'),
+    path('tag/edit/<int:id>',views.edit_tag,name='edit_tag'),
+
 ]

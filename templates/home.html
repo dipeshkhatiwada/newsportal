@@ -16,9 +16,9 @@
                     <div class="owl-carousel owl-theme breaking1">
                     {% for slider in sliders%}
                         <div class="item">
-                            <h2><a href="#">{{slider.title}}</a></h2>
+                            <h2><a href="{% url 'news' slider.slug %}">{{slider.title}}</a></h2>
                             {% if slider.image %}
-                                <a href="#"><img src="{{MEDIA_URL}}{{slider.image.url}}" alt=""></a>
+                                <a href="{% url 'news' slider.slug %}"><img src="{{MEDIA_URL}}{{slider.image.url}}" alt=""></a>
                             {% else %}
                                     NO image
                             {% endif %}
@@ -50,7 +50,7 @@
 
                     <section class="main-news-entry">
                         <article class="main-news-big-content">
-                            <a href="#">
+                            <a href="{% url 'news' main_news1.slug %}">
                                 <h1>{{main_news1}}&nbsp;</h1>
                                 <figure>
                                     {% if main_news1.image %}
@@ -67,7 +67,7 @@
                         {% for m_news in main_news %}
                             <article class="col-md-6">
                                 <div class="main-news-small-content">
-                                    <a href="#">
+                                    <a href="{% url 'news' m_news.slug %}">
                                         <h2>{{m_news.title}}</h2>
                                         <div class="main-news-small-detail">
                                             <div class="row">

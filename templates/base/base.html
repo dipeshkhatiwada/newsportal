@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html lang="en-US">
 <head>
     <title>{% block 'title' %}{% endblock %}</title>
@@ -24,7 +25,7 @@
             <div class="fl-top-navbar">
                 <div class="col-md-8 col-sm-12">
                     <ul>
-                        <li><a href="#"><i class="fa fa-calendar"></i><span>आज : २०७४ श्रावण २४ मंगलबार</span></a>
+                        <li><a href="#"><i class="fa fa-calendar"></i><span>आज : {% now "jS F Y H:i" %}</span></a>
                         </li>
                         <li><i class="fa fa-phone"></i><span>+१२३४५६७८९०</span></li>
                         <li><a class="mail" href="#"><i class="fa fa-envelope"><span>hello@abc.com</span></i></a>
